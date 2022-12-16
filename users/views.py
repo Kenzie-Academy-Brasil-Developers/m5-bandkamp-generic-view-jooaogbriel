@@ -61,12 +61,4 @@ class UserDetailView(APIView):
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    def get(self, request: Request, pk: int) -> Response:
         
-        user2 = get_object_or_404(User, pk=pk)
-
-        self.check_object_permissions(request, user)
-
-        serializer = UserSerializer(user)
-
-        return Response(serializer.data)
