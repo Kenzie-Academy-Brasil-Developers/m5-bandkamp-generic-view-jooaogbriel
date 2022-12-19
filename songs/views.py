@@ -23,3 +23,12 @@ class SongView(generics.ListCreateAPIView, PageNumberPagination):
     def perform_create(self, serializer):
         album = get_object_or_404(Album, id=self.kwargs[self.lookup_url_kwarg])
         serializer.save(album=album)
+        
+
+    def get_queryset(self):
+        album_id = self.kwargs[self.lookup_url_kwarg]
+        return Song.objects.filter(id=album_id)
+
+    def perform_create(self, serializer):
+        album = get_object_or_404(Album, id=self.kwargs[self.lookup_url_kwarg])
+        serializer.save(album=album)
